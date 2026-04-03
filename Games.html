@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games | DiL</title>
+    <meta name="description" content="Engage with fun and interactive educational games. Train your brain with puzzles, strategy games, and numerical challenges at DiL.">
+    <link rel="icon" type="image/webp" href="favicon.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.webp" alt="DiL Logo" width="40" height="40">
+                    <span><span class="logo-di">Di</span><span class="logo-l">L</span></span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle Navigation Menu"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="e-resources.html">E-Resources</a></li>
+                    <li><a href="Games.html" class="active">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+    <!-- Hero -->
+    <section class="category-hero">
+        <div class="container">
+            <h1>Educational Games</h1>
+            <p>Interactive and fun ways to train your brain and learn new skills.</p>
+            <div class="category-search">
+                <input type="text" id="game-search" placeholder="Search games (e.g., 2048, Sudoku)..." aria-label="Search games">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Grid -->
+    <section class="categories-display" style="padding-top: 20px; padding-bottom: 80px;">
+        <div class="container">
+            <h2 style="margin-bottom: 30px; text-align: center; color: var(--primary-dark);">Play & Learn</h2>
+            <div class="categories-grid">
+
+                <div class="category-card" onclick="window.open('https://amit-develober.github.io/2048/', '_blank', 'noopener,noreferrer')" role="button" tabindex="0" aria-label="Play 2048 Game">
+                    <div class="category-icon-wrapper">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>2048</h3>
+                    <p>A classic sliding block puzzle game to test your logic and numbers.</p>
+                </div>
+                
+                <div class="category-card" onclick="window.open('https://lichess.org/', '_blank', 'noopener,noreferrer')" role="button" tabindex="0" aria-label="Play Chess on Lichess">
+                    <div class="category-icon-wrapper">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3>Chess</h3>
+                    <p>The ultimate strategy game. Play and analyze to improve your planning.</p>
+                </div>
+
+                <div class="category-card" onclick="window.open('https://amit-develober.github.io/mt/', '_blank', 'noopener,noreferrer')" role="button" tabindex="0" aria-label="Play Maths Games">
+                    <div class="category-icon-wrapper">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Maths Game</h3>
+                    <p>Test your math skills with this fast-paced numerical challenge.</p>
+                </div>
+
+                <div class="category-card" onclick="window.open('https://scratch.mit.edu/', '_blank', 'noopener,noreferrer')" role="button" tabindex="0" aria-label="Create with Scratch">
+                    <div class="category-icon-wrapper">
+                        <i class="fas fa-cat"></i>
+                    </div>
+                    <h3>Scratch</h3>
+                    <p>Create stories, games, and animations. Share with others around the world.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo footer-logo">
+                        <img src="assets/images/logo.webp" alt="DiL Logo" width="40" height="40" loading="lazy">
+                        <span><span class="logo-di">Di</span><span class="logo-l">L</span></span>
+                    </div>
+                    <p>Elevating education through limitless digital resources.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="e-resources.html">E-Resources</a></li>
+                        <li><a href="Games.html">Games</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@digitallib.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (234) 567-890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education Lane, Digital City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DiL. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts moved to head with defer -->
+</body>
+</html>

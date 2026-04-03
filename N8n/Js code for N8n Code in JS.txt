@@ -1,0 +1,56 @@
+// Get email content
+let emailText = $json.text || $json.html || "";
+
+// Clean HTML + normalize text
+emailText = emailText
+  .replace(/<[^>]*>/g, "")     // remove HTML
+  .replace(/\r\n/g, "\n")      // normalize line breaks
+  .replace(/\n+/g, "\n")       // remove extra lines
+  .trim();
+
+// Split into lines
+const lines = emailText.split("\n");
+
+// Initialize fields
+let name = "";
+let email = "";
+let message = "";
+
+// Extract data line-by-line (STRICT matching)
+for (let line of lines) {
+  line = line.trim();
+
+  if (/^name\s*:/i.test(line)) {
+    name = line.split(":")[1]?.trim();
+  }
+
+  if (/^email\s*:/i.test(line)) {
+    email = line.split(":")[1]?.trim();
+  }
+
+  if (/^message\s*:/i.test(line)) {
+    message = line.split(":")[1]?.trim();
+  }
+}
+
+// Convert DateTime to IST (India)
+const rawDate = $json.date || $json.internalDate || new Date();
+
+const d = new Date(rawDate);
+
+const formattedDate =
+  d.toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata" }) +
+  " " +
+  d.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
+
+// Return final clean data
+return [
+  {
+    json: {
+      name: name || "Not Found",
+      email: email || "Not Found",
+      datetime: formattedDate,
+      message: message || "Not Found"
+    }
+  }
+];

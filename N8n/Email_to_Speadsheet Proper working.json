@@ -1,0 +1,290 @@
+{
+  "name": "Email_to_Speadsheet Proper working",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "readStatus": "unread"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1184,
+        -448
+      ],
+      "id": "3b89de16-a481-43b5-9bcc-08ad80ed5f0f",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XymNvSYPAO7OB6hj",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1rp8tNNlwDy4Db3P68K6S4n5jWKqduHzhOXS-HmZzEp0",
+          "mode": "list",
+          "cachedResultName": "N8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rp8tNNlwDy4Db3P68K6S4n5jWKqduHzhOXS-HmZzEp0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rp8tNNlwDy4Db3P68K6S4n5jWKqduHzhOXS-HmZzEp0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Message": "={{ $json.Message }}",
+            "Name": "={{ $json.Name }}",
+            "E-Mail": "={{ $json.Email }}",
+            "Date-Time": "={{ $json['Data  Time'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-Mail",
+              "displayName": "E-Mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date-Time",
+              "displayName": "Date-Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -736,
+        -448
+      ],
+      "id": "d81678db-375d-43c8-b1b2-5c80ad74f7bb",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "swDHpBKe7XgXgHtk",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get email content\nlet emailText = $json.text || $json.html || \"\";\n\n// Clean HTML + normalize text\nemailText = emailText\n  .replace(/<[^>]*>/g, \"\")     // remove HTML\n  .replace(/\\r\\n/g, \"\\n\")      // normalize line breaks\n  .replace(/\\n+/g, \"\\n\")       // remove extra lines\n  .trim();\n\n// Split into lines\nconst lines = emailText.split(\"\\n\");\n\n// Initialize fields\nlet name = \"\";\nlet email = \"\";\nlet message = \"\";\n\n// Extract data line-by-line (STRICT matching)\nfor (let line of lines) {\n  line = line.trim();\n\n  if (/^name\\s*:/i.test(line)) {\n    name = line.split(\":\")[1]?.trim();\n  }\n\n  if (/^email\\s*:/i.test(line)) {\n    email = line.split(\":\")[1]?.trim();\n  }\n\n  if (/^message\\s*:/i.test(line)) {\n    message = line.split(\":\")[1]?.trim();\n  }\n}\n\n// Convert DateTime to IST (India)\nconst rawDate = $json.date || $json.internalDate || new Date();\n\nconst d = new Date(rawDate);\n\nconst formattedDate =\n  d.toLocaleDateString(\"en-IN\", { timeZone: \"Asia/Kolkata\" }) +\n  \" \" +\n  d.toLocaleTimeString(\"en-IN\", { timeZone: \"Asia/Kolkata\" });\n\n// Return final clean data\nreturn [\n  {\n    json: {\n      name: name || \"Not Found\",\n      email: email || \"Not Found\",\n      datetime: formattedDate,\n      message: message || \"Not Found\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        -448
+      ],
+      "id": "5be069eb-cde9-41e9-bbb1-f76164f714c2",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dfbb2dfd-ea94-46ac-846b-a214b3b48cfd",
+              "name": "Name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "4ba9a1df-3a8d-46b4-8c76-1a8e4134ef6c",
+              "name": "Email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "caf63675-2c91-4453-8ebe-63489341666c",
+              "name": "Data  Time",
+              "value": "={{ $json.datetime }}",
+              "type": "string"
+            },
+            {
+              "id": "27b8df38-bf4c-4707-80e8-c39648c71d9a",
+              "name": "Message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -896,
+        -448
+      ],
+      "id": "255442b8-f30f-46f0-adfb-f88ea3ae987d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json['E-Mail'] }}",
+        "subject": "DiL Digital Library",
+        "emailType": "text",
+        "message": "=Hello {{ $json.Name }} ,\nThank you for visiting our ** DiL Digital Library** 📚  \nWe truly appreciate your time and interest. Our team has received your request, and we will get in touch with you shortly.  \n\nIf you’re feeling excited, we’re glad to be part of your journey! 😊 \nIf something didn’t go as expected, don’t worry—we’re here to help and make things right.\n\nStay tuned—we’ll contact you soon!  **– DiL Digital Library Team** ",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -576,
+        -448
+      ],
+      "id": "43f52d00-92ce-4e9c-8c67-ebd63632f8e5",
+      "name": "Send a message",
+      "webhookId": "1f7301ad-ca91-46f1-a3d7-0439e20228b6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XymNvSYPAO7OB6hj",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -400,
+        -448
+      ],
+      "id": "7f07533c-f6eb-40ce-ab4c-c2519e75ca5c",
+      "name": "Mark a message as read",
+      "webhookId": "898a33d0-812c-4243-aace-3c429b405aa9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XymNvSYPAO7OB6hj",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "48a46ae1-2a59-485c-9290-3ad1411e6e2e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7e75501befdf1dc49121b0cd2d6456cbf1f139306200e58c191bc11740173ffa"
+  },
+  "id": "Wax86qdewXiULCUd",
+  "tags": []
+}

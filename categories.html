@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | DiL</title>
+    <meta name="description" content="Browse through our wide range of digital library categories including Science, Technology, Literature, and History. Find the perfect resource for your studies.">
+    <link rel="icon" type="image/webp" href="favicon.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/data.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.webp" alt="DiL Logo" width="40" height="40">
+                    <span><span class="logo-di">Di</span><span class="logo-l">L</span></span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle Navigation Menu"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="categories.html" class="active">Categories</a></li>
+                    <li><a href="e-resources.html">E-Resources</a></li>
+                    <li><a href="Games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+    <!-- Categories Header -->
+    <section class="category-hero">
+        <div class="container">
+            <h1>Explore Categories</h1>
+            <p>From Science to Literature, find your perfect read.</p>
+            <div class="category-search">
+                <input type="text" id="cat-search" placeholder="Search categories (e.g., Science, Tech)..." aria-label="Search categories">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Grid -->
+    <section class="categories-display">
+        <div class="container">
+            <div id="all-categories-grid" class="categories-grid" data-dynamic="true">
+                <!-- Categories will be injected here -->
+            </div>
+        </div>
+    </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo footer-logo">
+                        <img src="assets/images/logo.webp" alt="DiL Logo" width="40" height="40" loading="lazy">
+                        <span><span class="logo-di">Di</span><span class="logo-l">L</span></span>
+                    </div>
+                    <p>Elevating education through limitless digital resources.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="e-resources.html">E-Resources</a></li>
+                        <li><a href="Games.html">Games</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@digitallib.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (234) 567-890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education Lane, Digital City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DiL. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Scripts moved to head with defer -->
+</body>
+</html>
