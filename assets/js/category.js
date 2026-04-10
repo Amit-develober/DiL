@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderFilteredBooks(categoryId, searchQuery);
     initInnerSearch(categoryId);
-    initModal();
 });
 
 function renderFilteredBooks(categoryId, searchQuery) {
@@ -113,28 +112,4 @@ function updateGridContent(books) {
             grid.appendChild(card);
         });
     }
-}
-
-function initModal() {
-    const modal = document.getElementById('reader-modal');
-    if (!modal) return;
-    const closeBtn = document.querySelector('.close-modal');
-
-    closeBtn.onclick = () => modal.classList.remove('active');
-    window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
-}
-
-function openModal(book) {
-    const modal = document.getElementById('reader-modal');
-    const mImg = document.getElementById('modal-img');
-    const mTitle = document.getElementById('modal-title');
-    const mAuthor = document.getElementById('modal-author');
-    const mCat = document.getElementById('modal-cat');
-
-    mImg.src = book.image;
-    mTitle.innerText = book.title;
-    mAuthor.innerText = book.author;
-    mCat.innerText = book.category ? book.category.toUpperCase() : 'GENERAL';
-
-    modal.classList.add('active');
 }
